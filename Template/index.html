@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout Laptop Shop</title>
+  <style>
+    :root {
+      --bg: #09090b;
+      --text: #fafafa;
+      --accent: #3b82f6;
+      --card: #18181b;
+      --muted: #a1a1aa;
+      --border: #27272a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at top right, #111827 0%, var(--bg) 38%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .wrapper {
+      width: min(1200px, 92vw);
+      margin: 3rem auto;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 560px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .22s ease, border-color .22s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .content {
+      padding: 1rem;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .model {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .brand {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .specs {
+      margin: 0;
+      color: #d4d4d8;
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+
+    .bottom {
+      margin-top: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .price {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .btn {
+      border: none;
+      border-radius: 10px;
+      background: var(--accent);
+      color: var(--text);
+      padding: 0.6rem 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color .2s ease;
+    }
+
+    .btn:hover {
+      background: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrapper">
+    <section class="hero">
+      <div>
+        <h1>Checkout Laptop Shop</h1>
+        <p>Discover premium laptops engineered for creators, engineers, and power users who demand top-tier performance in a refined design language.</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      {% for laptop in laptops %}
+      <article class="card">
+        <img src="{{ laptop.image_url }}" alt="{{ laptop.brand }} {{ laptop.model }}" />
+        <div class="content">
+          <p class="brand">{{ laptop.brand }}</p>
+          <h2 class="model">{{ laptop.model }}</h2>
+          <p class="specs">CPU: {{ laptop.cpu }}<br />RAM: {{ laptop.ram }}</p>
+          <div class="bottom">
+            <span class="price">{{ laptop.price }}</span>
+            <button class="btn">Add to Cart</button>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </section>
+  </main>
+</body>
+</html>
