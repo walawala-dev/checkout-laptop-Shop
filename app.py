@@ -43,6 +43,11 @@ def home():
     # Inside index.html, the {% for laptop in laptops %} loop will read this data
     return render_template('index.html', laptops=laptop_data)
 
+# update: added by me per chatgpt
+@app.route('/ping')
+def ping():
+    return "Pong! Flask is successfully running on Vercel."
+    
 # This block allows you to test the app locally before pushing to GitHub
 if __name__ == '__main__':
     # Runs on http://127.0.0.1:5000/
