@@ -41,7 +41,7 @@ laptop_data = [
 def home():
     # This sends the 'laptop_data' list to your index.html file
     # Inside index.html, the {% for laptop in laptops %} loop will read this data
-    return render_template('templates/index.html', laptops=laptop_data)
+    return render_template('index.html', laptops=laptop_data)
 
 # This block allows you to test the app locally before pushing to GitHub
 if __name__ == '__main__':
