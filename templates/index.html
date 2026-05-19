@@ -1,5 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- Put this inside your Header div -->
+<div style="position: absolute; top: 2rem; right: 2rem; font-size: 1.2rem; cursor: pointer;">
+    🛒 Cart: <span id="cart-badge" style="background: #3b82f6; padding: 2px 8px; border-radius: 12px; font-weight: bold;">0</span>
+</div>
+
+<!-- Add this invisible notification banner -->
+<div id="notification" style="display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #10b981; padding: 1rem 2rem; border-radius: 8px; font-weight: bold; z-index: 100;"></div>
+
+<!-- Update your Add to Cart Button to trigger the JS -->
+<button class="btn-add" onclick="addToCart('{{ laptop.brand }} {{ laptop.model }}', {{ laptop.price }})">
+    Add to Cart
+</button>
+
+  
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -130,7 +145,71 @@
     .btn:hover {
       background: #2563eb;
     }
+
+/* Skeleton Pulse Animation */
+@keyframes pulse {
+    0% { background-color: #27272a; }
+    50% { background-color: #3f3f46; }
+    100% { background-color: #27272a; }
+}
+
+.skeleton-card {
+    background-color: #18181b;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid #27272a;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.skeleton-img {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeleton-text {
+    height: 20px;
+    border-radius: 4px;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeleton-text.short { width: 60%; }
+.skeleton-text.long { width: 90%; }
+.skeleton-button {
+    height: 40px;
+    border-radius: 8px;
+    margin-top: auto;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+      
   </style>
+
+  <script>
+    // Simple Cart Logic
+    let cartCount = 0;
+    let cartTotal = 0;
+
+    function addToCart(laptopName, price) {
+        cartCount++;
+        cartTotal += price;
+        
+        // Update the UI
+        document.getElementById('cart-badge').innerText = cartCount;
+        
+        // Show a visual confirmation
+        const notification = document.getElementById('notification');
+        notification.innerText = `${laptopName} added to cart!`;
+        notification.style.display = 'block';
+        
+        setTimeout(() => {
+            notification.style.display = 'none';
+        }, 3000);
+    }
+</script>
+  
 </head>
 <body>
   <main class="wrapper">
